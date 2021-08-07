@@ -9,5 +9,4 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity, Long, Activit
     public ActivityServiceImpl(ActivityRepository repository) {
         super(repository);
     }
-
 }
