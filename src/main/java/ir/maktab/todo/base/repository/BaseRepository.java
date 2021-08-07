@@ -2,11 +2,12 @@ package ir.maktab.todo.base.repository;
 
 import ir.maktab.todo.base.domain.BaseEntity;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
-public interface BaseRepository<E extends BaseEntity<ID>, ID>{
+public interface BaseRepository<E extends BaseEntity<ID>, ID extends Serializable>{
 
     E save(E e);
 

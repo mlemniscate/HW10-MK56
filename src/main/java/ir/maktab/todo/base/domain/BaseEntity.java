@@ -1,16 +1,21 @@
 package ir.maktab.todo.base.domain;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 @MappedSuperclass
-public class BaseEntity<ID> {
+public class BaseEntity<ID extends Serializable> {
+
+    public static final String IS_DELETED = "is_deleted";
 
     @Id
     @GeneratedValue
     private ID id;
 
+    @Column(name = IS_DELETED, columnDefinition = "TINYINT(1)")
     private Boolean isDeleted;
 
     public BaseEntity() {

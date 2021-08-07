@@ -4,11 +4,12 @@ import ir.maktab.todo.base.domain.BaseEntity;
 import ir.maktab.todo.base.repository.BaseRepository;
 import ir.maktab.todo.base.service.BaseService;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
-public class BaseServiceImpl<E extends BaseEntity<ID>, ID, R extends BaseRepository<E, ID>>
+public class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Serializable, R extends BaseRepository<E, ID>>
         implements BaseService<E, ID> {
 
     private final R repository;
