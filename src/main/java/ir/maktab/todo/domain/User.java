@@ -4,7 +4,9 @@ import ir.maktab.todo.base.domain.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = User.TABLE_NAME)
@@ -32,7 +34,28 @@ public class User extends BaseEntity<Long> {
     @Column(name = EMAIL)
     private String email;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Activity> items;
+
+    public User(Long aLong, String firstName, String lastName, String username, String password, String email, Set<Activity> items) {
+        super(aLong);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.items = items;
+    }
+
     public User() {
+    }
+
+    public Set<Activity> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Activity> items) {
+        this.items = items;
     }
 
     public String getFirstName() {

@@ -33,4 +33,8 @@ public class Activity extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private ActivityStatus activityStatus;
 
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+
 }

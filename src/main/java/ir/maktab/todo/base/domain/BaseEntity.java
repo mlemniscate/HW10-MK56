@@ -10,9 +10,11 @@ import java.io.Serializable;
 public class BaseEntity<ID extends Serializable> {
 
     public static final String IS_DELETED = "is_deleted";
+    public static final String ID = "id";
 
     @Id
     @GeneratedValue
+    @Column(name = ID)
     private ID id;
 
     @Column(name = IS_DELETED, columnDefinition = "TINYINT(1)")
