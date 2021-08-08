@@ -6,6 +6,10 @@ import ir.maktab.todo.repository.UserRepository;
 import ir.maktab.todo.service.UserService;
 import ir.maktab.todo.service.dto.CreateUserDTO;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository> implements UserService {
 
     public UserServiceImpl(UserRepository repository) {
@@ -20,5 +24,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
     @Override
     public User signUp(CreateUserDTO createUserDTO) {
         return null;
+    }
+
+    @Override
+    public List<String> getAllUserNames() throws SQLException {
+        List<User> users = findAll();
+        List<String> usernames = new ArrayList<>();
+        for (User user : users) {
+            usernames.add(user.getUsername());
+        }
+        return usernames;
     }
 }
