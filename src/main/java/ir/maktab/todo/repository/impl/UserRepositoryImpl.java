@@ -5,6 +5,7 @@ import ir.maktab.todo.domain.User;
 import ir.maktab.todo.repository.UserRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,12 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
 
     @Override
     public User save(User user) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
+        Query query = entityManager.createQuery("from User order by id DESC");
+        query.setMaxResults(1);
+        User resultUser = (User) query.getResultList().get(0);
         return null;
     }
 
