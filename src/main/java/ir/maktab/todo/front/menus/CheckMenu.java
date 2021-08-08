@@ -1,11 +1,13 @@
 package ir.maktab.todo.front.menus;
 
+import java.util.ArrayList;
+
 public class CheckMenu extends Menu implements RunnableMenu<Boolean>{
     private final String message;
     private boolean isAccepted;
 
-    public CheckMenu(String message) {
-        super(new String[]{"Yes", "No"});
+    public CheckMenu(ArrayList<String> items, String message) {
+        super(items);
         this.message = message;
 
     }

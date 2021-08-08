@@ -8,4 +8,6 @@ public interface UserService extends BaseService<User, Long> {
     User logIn(String username, String password);
 
     User signUp(CreateUserDTO createUserDTO);
+
+    String[] getAllUserNames();
 }
