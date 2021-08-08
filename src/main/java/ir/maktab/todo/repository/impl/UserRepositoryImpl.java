@@ -24,7 +24,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
         Query query = entityManager.createQuery("from User order by id DESC");
         query.setMaxResults(1);
         User resultUser = (User) query.getResultList().get(0);
-        return null;
+        return resultUser;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
 
     @Override
     public List<User> findAll() throws SQLException {
-        return entityManager.createQuery("from User", User.class).getResultList();
+        return entityManager.createQuery("from User where isDeleted = :is_deleted", User.class).setParameter("is_deleted", false).getResultList();
     }
 
     @Override
