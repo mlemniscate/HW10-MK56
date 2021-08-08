@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserMenu extends Menu implements RunnableMenu<Void>{
@@ -94,9 +95,9 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
         return new InputString("Enter your activity name: ").getStringInput();
     }
 
-    private List<Activity> showActivities() {
+    private List<Activity> showActivities(Comparator<Activity> comparator) {
         List<Activity> activities = new ArrayList<>(user.getActivities());
-        Collections.sort(activities);
+        activities.sort(comparator);
         int count = 0;
         for (Activity activity : activities) {
             System.out.printf("%n#%02d%n%s%n", ++count, activity.toString());
