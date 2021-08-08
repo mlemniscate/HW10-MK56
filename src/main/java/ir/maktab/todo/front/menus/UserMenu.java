@@ -1,9 +1,13 @@
 package ir.maktab.todo.front.menus;
 
 
+import ir.maktab.todo.ApplicationContext;
 import ir.maktab.todo.domain.Activity;
 import ir.maktab.todo.domain.User;
+import ir.maktab.todo.domain.enumeration.ActivityStatus;
+import ir.maktab.todo.front.input.InputString;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,9 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
             showMenu();
             switch (getChosenItem()) {
                 case 1:
-
+                    Activity activity = getActivityInformation();
+                    user.getActivities().add(activity);
+                    ApplicationContext.activityService.save(activity);
                     break;
 //                case 2:
 //                    Product product = ApplicationContext.productService.getProduct();
@@ -47,6 +53,25 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
                     else break;
             }
         }
+    }
+
+    private Activity getActivityInformation() {
+        return new Activity(
+                enterName(),
+                enterDescription(),
+                new Date(System.currentTimeMillis()),
+                new Date(System.currentTimeMillis()),
+                ActivityStatus.OPEN,
+                user
+        );
+    }
+
+    private String enterDescription() {
+        return new InputString("Enter your activity name: ").getStringInput();
+    }
+
+    private String enterName() {
+        return new InputString("Enter your activity description: ").getStringInput();
     }
 
     private void showActivities() {

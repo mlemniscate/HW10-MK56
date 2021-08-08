@@ -37,10 +37,13 @@ public class Activity extends BaseEntity<Long> {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    public Activity(String activityName, String description, Date createdDate) {
+    public Activity(String activityName, String description, Date createdDate, Date lastUpdatedDate, ActivityStatus activityStatus, User user) {
         this.activityName = activityName;
         this.description = description;
         this.createdDate = createdDate;
+        this.lastUpdatedDate = lastUpdatedDate;
+        this.activityStatus = activityStatus;
+        this.user = user;
     }
 
     public Activity() {
