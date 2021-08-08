@@ -4,11 +4,11 @@ import ir.maktab.todo.base.domain.BaseEntity;
 import ir.maktab.todo.domain.enumeration.ActivityStatus;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = Activity.TABLE_NAME)
-public class Activity extends BaseEntity<Long> {
+public class Activity extends BaseEntity<Long> implements Comparable<Activity>{
 
     public static final String TABLE_NAME = "activities";
     public static final String ACTIVITY_NAME = "activity_name";
@@ -24,10 +24,10 @@ public class Activity extends BaseEntity<Long> {
     private String description;
 
     @Column(name = CREATED_DATE)
-    private Date createdDate;
+    private Timestamp createdDate;
 
     @Column(name = LAST_UPDATED_DATE)
-    private Date lastUpdatedDate;
+    private Timestamp lastUpdatedDate;
 
     @Column(name = ACTIVITY_STATUS)
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public class Activity extends BaseEntity<Long> {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    public Activity(String activityName, String description, Date createdDate, Date lastUpdatedDate, ActivityStatus activityStatus, User user) {
+    public Activity(String activityName, String description, Timestamp createdDate, Timestamp lastUpdatedDate, ActivityStatus activityStatus, User user) {
         this.activityName = activityName;
         this.description = description;
         this.createdDate = createdDate;
@@ -72,19 +72,19 @@ public class Activity extends BaseEntity<Long> {
         this.description = description;
     }
 
-    public Date getCreatedDate() {
+    public Timestamp getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getLastUpdatedDate() {
+    public Timestamp getLastUpdatedDate() {
         return lastUpdatedDate;
     }
 
-    public void setLastUpdatedDate(Date lastUpdatedDate) {
+    public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
@@ -102,5 +102,10 @@ public class Activity extends BaseEntity<Long> {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public int compareTo(Activity o) {
+        return activityName.compareTo(o.activityName);
     }
 }

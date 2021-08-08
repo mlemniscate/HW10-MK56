@@ -8,9 +8,10 @@ import ir.maktab.todo.domain.enumeration.ActivityStatus;
 import ir.maktab.todo.front.input.InputInt;
 import ir.maktab.todo.front.input.InputString;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserMenu extends Menu implements RunnableMenu<Void>{
@@ -63,7 +64,7 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
                 chosenItem == 1 ? ActivityStatus.OPEN
                         : chosenItem == 2 ? ActivityStatus.IN_PROGRESS
                         : ActivityStatus.COMPLETED);
-        activity.setLastUpdatedDate(new Date(System.currentTimeMillis()));
+        activity.setLastUpdatedDate(new Timestamp(System.currentTimeMillis()));
         return activity;
     }
 
@@ -78,8 +79,8 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
         return new Activity(
                 enterName(),
                 enterDescription(),
-                new Date(System.currentTimeMillis()),
-                new Date(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis()),
                 ActivityStatus.OPEN,
                 user
         );
@@ -95,9 +96,10 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
 
     private List<Activity> showActivities() {
         List<Activity> activities = new ArrayList<>(user.getActivities());
+        Collections.sort(activities);
         int count = 0;
         for (Activity activity : activities) {
-            System.out.printf("#%02d%n%s%n",++count , activity.toString());
+            System.out.printf("%n#%02d%n%s%n",++count , activity.toString());
         }
         return activities;
     }
