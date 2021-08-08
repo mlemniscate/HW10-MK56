@@ -4,6 +4,7 @@ package ir.maktab.todo.front.menus;
 import ir.maktab.todo.domain.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserMenu extends Menu implements RunnableMenu<Void>{
@@ -17,9 +18,9 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
 
     @Override
     public Void runMenu() throws SQLException {
-//        while (true) {
-//            showMenu();
-//            /*switch (getChosenItem()) {
+        while (true) {
+            showMenu();
+            switch (getChosenItem()) {
 //                case 1:
 //                    new ShowCartMenu(cart, user).runMenu();
 //                    break;
@@ -34,12 +35,15 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
 //                case 4:
 //                    new EditUserInformationMenu(user).runMenu();
 //                    break;
-//                case 5:
-//                    if(new CheckMenu("Are you sure you want to log out?").runMenu()) return null;
-//                    else break;
-//            }*/
-//        }
-        return null;
+                case 5:
+                    if (new CheckMenu(new ArrayList<String>() {{
+                        add("Yes");
+                        add("No");
+                    }},
+                            "Are you sure you want to log out?").runMenu()) return null;
+                    else break;
+            }
+        }
     }
 }
 

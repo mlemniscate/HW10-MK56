@@ -29,7 +29,11 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
                     if (!Objects.isNull(loginUser)) {
                         new UserMenu(
                                 new ArrayList<String>() {{
-                                    add("");
+                                    add("Add Activity");
+                                    add("Change Activity Status");
+                                    add("Edit Activity");
+                                    add("Sort Activities");
+                                    add("Log Out");
                                 }},
                                 loginUser
                         ).runMenu();
