@@ -5,13 +5,13 @@ import ir.maktab.todo.ApplicationContext;
 import ir.maktab.todo.domain.Activity;
 import ir.maktab.todo.domain.User;
 import ir.maktab.todo.domain.enumeration.ActivityStatus;
+import ir.maktab.todo.front.input.InputInt;
 import ir.maktab.todo.front.input.InputString;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class UserMenu extends Menu implements RunnableMenu<Void>{
     private final User user;
@@ -29,14 +29,15 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
             showMenu();
             switch (getChosenItem()) {
                 case 1:
-                    Activity activity = getActivityInformation();
-                    user.getActivities().add(ApplicationContext.activityService.save(activity));
+                    Activity savedActivity = getActivityInformation();
+                    user.getActivities().add(ApplicationContext.activityService.save(savedActivity));
+                    showActivities();
                     break;
-//                case 2:
-//                    Product product = ApplicationContext.productService.getProduct();
-//                    int quantity = new InputInt("How much do you want?", product.getStock(), 1, null).getIntInput();
-//                    ApplicationContext.cartService.addProductToCart(product, cart, quantity);
-//                    break;
+                case 2:
+                    Activity activity = changeStatusOfAnActivity();
+                    ApplicationContext.activityService.update(activity);
+                    showActivities();
+                    break;
 //                case 3:
 //                    ApplicationContext.customerService.depositBalance(user);
 //                    break;
@@ -52,6 +53,25 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
                     else break;
             }
         }
+    }
+
+    private Activity changeStatusOfAnActivity() {
+        Activity activity = chooseActivity();
+        System.out.println("\n1.Open\n2.In Progress\n3.Completed");
+        int chosenItem = new InputInt("Choose a status for your activity: ", 3, 1, null).getIntInput();
+        activity.setActivityStatus(
+                chosenItem == 1 ? ActivityStatus.OPEN
+                        : chosenItem == 2 ? ActivityStatus.IN_PROGRESS
+                        : ActivityStatus.COMPLETED);
+        activity.setLastUpdatedDate(new Date(System.currentTimeMillis()));
+        return activity;
+    }
+
+    private Activity chooseActivity() {
+        List<Activity> activities = showActivities();
+        int chosenItem = new InputInt("Enter your activity number: ",
+                user.getActivities().size(), 1, null).getIntInput() - 1;
+        return activities.get(chosenItem);
     }
 
     private Activity getActivityInformation() {
@@ -73,12 +93,13 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
         return new InputString("Enter your activity name: ").getStringInput();
     }
 
-    private void showActivities() {
-        Set<Activity> activities = user.getActivities();
+    private List<Activity> showActivities() {
+        List<Activity> activities = new ArrayList<>(user.getActivities());
         int count = 0;
         for (Activity activity : activities) {
-            System.out.printf("%02d%n%s%n",++count , activity.toString());
+            System.out.printf("#%02d%n%s%n",++count , activity.toString());
         }
+        return activities;
     }
 }
 

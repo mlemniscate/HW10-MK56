@@ -28,7 +28,10 @@ public class ActivityRepositoryImpl extends BaseRepositoryImpl<Activity, Long> i
 
     @Override
     public Activity update(Activity activity) {
-        return null;
+        entityManager.getTransaction().begin();
+        Activity mergeActivity = entityManager.merge(activity);
+        entityManager.getTransaction().commit();
+        return mergeActivity;
     }
 
     @Override
