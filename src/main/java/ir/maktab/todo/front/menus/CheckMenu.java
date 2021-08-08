@@ -1,6 +1,6 @@
-package ir.maktab.todo.front;
+package ir.maktab.todo.front.menus;
 
-public class CheckMenu extends ir.maktab.store.front.menu.Menu implements RunnableMenu<Boolean>{
+public class CheckMenu extends Menu implements RunnableMenu<Boolean>{
     private final String message;
     private boolean isAccepted;
 

@@ -1,7 +1,7 @@
-package ir.maktab.todo.front;
+package ir.maktab.todo.front.menus;
 
 
-import ir.maktab.store.front.input.InputInt;
+import ir.maktab.todo.front.input.InputInt;
 
 /*
 * Menu is an abstract class that help you to create your sub menus
