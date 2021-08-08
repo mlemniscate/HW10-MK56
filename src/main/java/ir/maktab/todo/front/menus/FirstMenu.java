@@ -1,7 +1,7 @@
 package ir.maktab.todo.front.menus;
 
 
-import ir.maktab.todo.domain.User;
+import ir.maktab.todo.service.dto.CreateUserDTO;
 
 import java.sql.SQLException;
 
@@ -24,7 +24,7 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
 //                    }
                     break;
                 case 2:
-                    User signUpUser = getSignUpUserInfo();
+                    CreateUserDTO signUpUserDTO = getSignUpUserInfo();
 //                    ApplicationContext.userService.signUp(signUpUser);
                     break;
                 case 3:
@@ -34,7 +34,7 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
         }
     }
 
-    private User getSignUpUserInfo() {
+    private CreateUserDTO getSignUpUserInfo() {
         return null;
     }
 }
