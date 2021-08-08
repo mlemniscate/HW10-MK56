@@ -31,19 +31,15 @@ public class User extends BaseEntity<Long> {
     @Column(name = PASSWORD)
     private String password;
 
-    @Column(name = EMAIL)
-    private String email;
-
     @OneToMany(mappedBy = "user")
     private Set<Activity> items;
 
-    public User(Long aLong, String firstName, String lastName, String username, String password, String email, Set<Activity> items) {
+    public User(Long aLong, String firstName, String lastName, String username, String password, Set<Activity> items) {
         super(aLong);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.email = email;
         this.items = items;
     }
 
@@ -88,13 +84,5 @@ public class User extends BaseEntity<Long> {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
