@@ -18,7 +18,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
 
     @Override
     public User logIn(String username, String password) {
-        return null;
+        return repository.findByUsernamePassword(username, password);
     }
 
     @Override

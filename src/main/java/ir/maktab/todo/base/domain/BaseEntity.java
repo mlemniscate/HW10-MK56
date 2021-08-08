@@ -17,8 +17,8 @@ public class BaseEntity<ID extends Serializable> {
     @Column(name = ID)
     private ID id;
 
-    @Column(name = IS_DELETED, columnDefinition = "TINYINT(1) DEFAULT 0")
-    private Integer isDeleted;
+    @Column(name = IS_DELETED, columnDefinition = "TINYINT(1) DEFAULT false")
+    private Boolean isDeleted = false;
 
     public BaseEntity() {
     }
@@ -27,7 +27,7 @@ public class BaseEntity<ID extends Serializable> {
         this.id = id;
     }
 
-    public BaseEntity(ID id, Integer isDeleted) {
+    public BaseEntity(ID id, Boolean isDeleted) {
         this.id = id;
         this.isDeleted = isDeleted;
     }
@@ -40,11 +40,11 @@ public class BaseEntity<ID extends Serializable> {
         this.id = id;
     }
 
-    public Integer getDeleted() {
+    public Boolean getDeleted() {
         return isDeleted;
     }
 
-    public void setDeleted(Integer deleted) {
+    public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
 }

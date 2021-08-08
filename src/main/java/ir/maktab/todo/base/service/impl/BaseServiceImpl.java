@@ -12,7 +12,7 @@ import java.util.List;
 public class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Serializable, R extends BaseRepository<E, ID>>
         implements BaseService<E, ID> {
 
-    private final R repository;
+    protected final R repository;
 
     public BaseServiceImpl(R repository) {
         this.repository = repository;

@@ -14,4 +14,9 @@ public abstract class BaseRepositoryImpl<E extends BaseEntity<ID>, ID extends Se
     public BaseRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
+    @Override
+    public E save(E e) {
+        return null;
+    }
 }

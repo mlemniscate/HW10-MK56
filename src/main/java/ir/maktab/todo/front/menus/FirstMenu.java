@@ -3,12 +3,12 @@ package ir.maktab.todo.front.menus;
 
 import ir.maktab.todo.ApplicationContext;
 import ir.maktab.todo.domain.User;
-import ir.maktab.todo.front.input.InputDouble;
 import ir.maktab.todo.front.input.InputString;
 import ir.maktab.todo.service.dto.CreateUserDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FirstMenu extends Menu implements RunnableMenu<Void> {
 
@@ -23,17 +23,29 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
             showMenu();
             switch (getChosenItem()) {
                 case 1:
-//                    User loginUser = ApplicationContext.userService.login();
-//                    if(!Objects.isNull(loginUser)) {
-//                        new UserMenu(loginUser).runMenu();
-//                    }
+                    String username = new InputString("Enter your username: ").getStringInput();
+                    String password = new InputString("Enter your password: ").getStringInput();
+                    User loginUser = ApplicationContext.userService.logIn(username, password);
+                    if (!Objects.isNull(loginUser)) {
+                        new UserMenu(
+                                new ArrayList<String>() {{
+                                    add("");
+                                }},
+                                loginUser
+                        ).runMenu();
+                    } else {
+                        System.out.println("Your password or username is wrong!");
+                    }
                     break;
                 case 2:
                     CreateUserDTO signUpUserDTO = enterUserInformation();
                     ApplicationContext.userService.signUp(signUpUserDTO);
                     break;
                 case 3:
-                    if (new CheckMenu(new ArrayList<String>() {{add("Yes");add("No");}},
+                    if (new CheckMenu(new ArrayList<String>() {{
+                        add("Yes");
+                        add("No");
+                    }},
                             "Are you sure you want to exit?").runMenu()) return null;
                     else break;
             }
@@ -49,16 +61,6 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
                 enterPassword()
         );
     }
-
-//    // Get a String array that made of all the users usernames
-//    private String[] getUserNuser() throws SQLException {
-//        ArrayList<String> list = new ArrayList<>();
-//        List<User>user = findAll();
-//        for (User user : users) {
-//            list.add(user.getUsername());
-//        }
-//        return list.toArray(new String[0]);
-//    }
 
     // Get user username
     private String enterUsername() throws SQLException {
@@ -87,12 +89,6 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
         return new InputString("Enter your password: ",
                 "Your password must be minimum 8 characters, at least one letter and one number.",
                 "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", null).getStringInput();
-    }
-
-    // Get deposit amount from user
-    private double enterDepositAmount() throws SQLException {
-        return new InputDouble("Enter your deposit amount between 1$ and 10,000$: ", 10_000, 1, null
-        ).getDoubleInput();
     }
 
     public void editFirstName(User user) throws SQLException {

@@ -34,7 +34,10 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
 
     @Override
     public List<User> findAll() throws SQLException {
-        return entityManager.createQuery("from User where isDeleted = :is_deleted", User.class).setParameter("is_deleted", false).getResultList();
+        return entityManager.createQuery
+                ("from User where isDeleted = :is_deleted", User.class)
+                .setParameter("is_deleted", false)
+                .getResultList();
     }
 
     @Override
@@ -55,5 +58,16 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
     @Override
     public Boolean isExist(Long aLong) {
         return null;
+    }
+
+    @Override
+    public User findByUsernamePassword(String username, String password) {
+        List<User> resultList = entityManager.createQuery
+                ("from User where isDeleted = :is_deleted and username = :username and password = :password", User.class)
+                .setParameter("is_deleted", false)
+                .setParameter("username", username)
+                .setParameter("password", password)
+                .getResultList();
+        return resultList.size() > 0 ? resultList.get(0) : null;
     }
 }
