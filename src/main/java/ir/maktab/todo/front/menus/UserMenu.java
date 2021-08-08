@@ -42,9 +42,9 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
 //                case 3:
 //                    ApplicationContext.customerService.depositBalance(user);
 //                    break;
-//                case 4:
-//                    new EditUserInformationMenu(user).runMenu();
-//                    break;
+                case 4:
+
+                    break;
                 case 5:
                     if (new CheckMenu(new ArrayList<String>() {{
                         add("Yes");
@@ -99,7 +99,7 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
         Collections.sort(activities);
         int count = 0;
         for (Activity activity : activities) {
-            System.out.printf("%n#%02d%n%s%n",++count , activity.toString());
+            System.out.printf("%n#%02d%n%s%n", ++count, activity.toString());
         }
         return activities;
     }
