@@ -24,12 +24,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
     @Override
     public User signUp(CreateUserDTO createUserDTO) {
         return save(new User(
-                0L,
                 createUserDTO.getFirstName(),
                 createUserDTO.getLastName(),
                 createUserDTO.getUsername(),
-                createUserDTO.getPassword(),
-                null
+                createUserDTO.getPassword()
         ));
     }
 

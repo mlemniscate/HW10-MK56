@@ -2,10 +2,7 @@ package ir.maktab.todo.domain;
 
 import ir.maktab.todo.base.domain.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -34,8 +31,15 @@ public class User extends BaseEntity<Long> {
     @OneToMany(mappedBy = "user")
     private Set<Activity> items;
 
-    public User(Long aLong, String firstName, String lastName, String username, String password, Set<Activity> items) {
-        super(aLong);
+    public User(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, String firstName, String lastName, String username, String password, Set<Activity> items) {
+        super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

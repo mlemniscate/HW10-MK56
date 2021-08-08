@@ -29,7 +29,7 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
 //                    }
                     break;
                 case 2:
-                    CreateUserDTO signUpUserDTO = getSignUpUserInfo();
+                    CreateUserDTO signUpUserDTO = enterUserInformation();
                     ApplicationContext.userService.signUp(signUpUserDTO);
                     break;
                 case 3:
@@ -38,10 +38,6 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
                     else break;
             }
         }
-    }
-
-    private CreateUserDTO getSignUpUserInfo() {
-        return null;
     }
 
     // This method take all the information for sign a user and return an User user that information

@@ -17,7 +17,7 @@ public class BaseEntity<ID extends Serializable> {
     @Column(name = ID)
     private ID id;
 
-    @Column(name = IS_DELETED, columnDefinition = "TINYINT(1)")
+    @Column(name = IS_DELETED, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean isDeleted;
 
     public BaseEntity() {
