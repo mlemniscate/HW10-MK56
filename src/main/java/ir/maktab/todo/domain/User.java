@@ -3,6 +3,7 @@ package ir.maktab.todo.domain;
 import ir.maktab.todo.base.domain.BaseEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class User extends BaseEntity<Long> {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Set<Activity> items;
+    private Set<Activity> activities = new HashSet<>();
 
     public User(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
@@ -38,24 +39,24 @@ public class User extends BaseEntity<Long> {
         this.password = password;
     }
 
-    public User(Long id, String firstName, String lastName, String username, String password, Set<Activity> items) {
+    public User(Long id, String firstName, String lastName, String username, String password, Set<Activity> activities) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.items = items;
+        this.activities = activities;
     }
 
     public User() {
     }
 
-    public Set<Activity> getItems() {
-        return items;
+    public Set<Activity> getActivities() {
+        return activities;
     }
 
-    public void setItems(Set<Activity> items) {
-        this.items = items;
+    public void setActivities(Set<Activity> items) {
+        this.activities = items;
     }
 
     public String getFirstName() {

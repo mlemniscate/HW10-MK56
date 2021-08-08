@@ -37,4 +37,67 @@ public class Activity extends BaseEntity<Long> {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    public Activity(String activityName, String description, Date createdDate) {
+        this.activityName = activityName;
+        this.description = description;
+        this.createdDate = createdDate;
+    }
+
+    public Activity() {
+    }
+
+    @Override
+    public String toString() {
+        return "Activity Name = " + activityName + '\n' +
+                "Description = " + description + '\n' +
+                "Activity Status = " + activityStatus;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
+
+    public void setLastUpdatedDate(Date lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public ActivityStatus getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(ActivityStatus activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
