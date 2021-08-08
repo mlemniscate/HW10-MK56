@@ -30,8 +30,7 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
             switch (getChosenItem()) {
                 case 1:
                     Activity activity = getActivityInformation();
-                    user.getActivities().add(activity);
-                    ApplicationContext.activityService.save(activity);
+                    user.getActivities().add(ApplicationContext.activityService.save(activity));
                     break;
 //                case 2:
 //                    Product product = ApplicationContext.productService.getProduct();
@@ -67,11 +66,11 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
     }
 
     private String enterDescription() {
-        return new InputString("Enter your activity name: ").getStringInput();
+        return new InputString("Enter your activity description: ").getStringInput();
     }
 
     private String enterName() {
-        return new InputString("Enter your activity description: ").getStringInput();
+        return new InputString("Enter your activity name: ").getStringInput();
     }
 
     private void showActivities() {

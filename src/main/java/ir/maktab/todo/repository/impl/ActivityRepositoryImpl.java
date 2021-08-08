@@ -5,6 +5,7 @@ import ir.maktab.todo.domain.Activity;
 import ir.maktab.todo.repository.ActivityRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,12 @@ public class ActivityRepositoryImpl extends BaseRepositoryImpl<Activity, Long> i
 
     @Override
     public Activity save(Activity activity) {
-        return null;
+        entityManager.getTransaction().begin();
+        entityManager.persist(activity);
+        entityManager.getTransaction().commit();
+        Query query = entityManager.createQuery("from Activity order by id DESC");
+        query.setMaxResults(1);
+        return (Activity) query.getResultList().get(0);
     }
 
     @Override
