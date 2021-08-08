@@ -1,5 +1,6 @@
 package ir.maktab.todo.front.input;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,16 +10,16 @@ import java.util.regex.Pattern;
 public class InputString extends Input {
 
     private final String regex;
-    private final String[] unAllowedValues;
+    private final List<String> unAllowedValues;
     private String stringInput;
 
-    public InputString(String inputMessage, String warningMessage, String regex, String[] unAllowedValues) {
+    public InputString(String inputMessage, String warningMessage, String regex, List<String> unAllowedValues) {
         super(inputMessage, warningMessage);
         this.regex = regex;
         this.unAllowedValues = unAllowedValues;
     }
 
-    public InputString(String inputMessage, String regex, String[] unAllowedValues) {
+    public InputString(String inputMessage, String regex, List<String> unAllowedValues) {
         this(inputMessage, "Input value is not valid.\nPlease try again!", regex, unAllowedValues);
     }
 
@@ -26,7 +27,7 @@ public class InputString extends Input {
         this(inputMessage, "Input value is not valid.\nPlease try again!", regex, null);
     }
 
-    public InputString(String inputMessage, String[] unAllowedValues) {
+    public InputString(String inputMessage, List<String> unAllowedValues) {
         this(inputMessage, "Input value is not valid.\nPlease try again!", "", unAllowedValues);
     }
 
