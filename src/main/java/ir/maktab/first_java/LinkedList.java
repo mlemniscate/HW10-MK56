@@ -2,12 +2,21 @@ package ir.maktab.first_java;
 
 import java.util.Objects;
 
-public class LinkedList<T>{
+public class LinkedList<T> {
     private Node<T> head, tail = null;
-    private int size;
+    private int size = 0;
+    private int capacity = 10;
 
     boolean isEmpty() {
         return Objects.isNull(head);
+    }
+
+    T get(int index) {
+        return null;
+    }
+
+    void set(int index, T data) {
+
     }
 
     void add(T data) {
@@ -22,42 +31,60 @@ public class LinkedList<T>{
             tail = node;
         }
         tail = node;
+        size++;
     }
 
-     T delete() {
-        Node<T> previousNode = head;
-        if (previousNode.equals(tail)) {
+     T poll() {
+        Node<T> node = head;
+        if (node.equals(tail)) {
             tail = null;
             head = null;
-            return previousNode.data;
+            size--;
+            return node.data;
         } else {
-            while (!previousNode.next.equals(tail)) {
-                previousNode = previousNode.next;
-            }
+            node = tail;
+            tail = tail.privious;
+            tail.next = null;
+            size--;
+            return node.data;
         }
-        tail = previousNode;
-        return previousNode.next.data;
+    }
+
+    int size() {
+        return size;
     }
 
     boolean contain(T data) {
-        Node<T> node = head;
-        do {
-            if(node.data.equals(data)) return true;
-            else node = node.next;
-        } while (!Objects.isNull(node));
+        Node<T> startNode = head;
+        Node<T> endNode = tail;
+        int step = 0;
+        while(step != Math.ceil(size / 2.0)) {
+            if(startNode.data.equals(data)) return true;
+            else if (endNode.data.equals(data)) return true;
+            else {
+                startNode = startNode.next;
+                endNode = endNode.privious;
+                step++;
+            }
+        }
         return false;
     }
 
     int indexOf(T data) {
-        Node<T> node = head;
-        int counter = 0;
-        do {
-            if(node.data.equals(data)) return counter;
+        Node<T> startNode = head;
+        Node<T> endNode = tail;
+        int startStep = 0;
+        int endStep = size - 1;
+        while(startStep != Math.ceil(size / 2.0)) {
+            if(startNode.data.equals(data)) return startStep;
+            else if (endNode.data.equals(data)) return endStep;
             else {
-                node = node.next;
-                counter++;
+                startNode = startNode.next;
+                endNode = endNode.privious;
+                startStep++;
+                endStep--;
             }
-        } while (!Objects.isNull(node));
+        }
         return -1;
     }
 
