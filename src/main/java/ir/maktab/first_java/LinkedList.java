@@ -13,9 +13,13 @@ public class LinkedList<T>{
     void add(T data) {
         Node<T> node = new Node<>(data);
         if(head == null) {
-            head = node;
+            head = tail = node;
+            head.privious = null;
+            tail.next = null;
         } else {
             tail.next = node;
+            node.privious = tail;
+            tail = node;
         }
         tail = node;
     }
