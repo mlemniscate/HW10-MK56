@@ -53,7 +53,9 @@ public class Activity extends BaseEntity<Long> implements Comparable<Activity>{
     public String toString() {
         return "Activity Name = " + activityName + '\n' +
                 "Description = " + description + '\n' +
-                "Activity Status = " + activityStatus;
+                "Activity Status = " + activityStatus + '\n' +
+                "Created Date = " + createdDate + '\n' +
+                "Last Updated Date = " + lastUpdatedDate;
     }
 
     public String getActivityName() {
