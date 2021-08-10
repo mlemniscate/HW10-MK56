@@ -1,4 +1,4 @@
-package ir.maktab.first_java;
+package ir.maktab.java;
 
 public class FirstJavaApp {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ir.maktab.first_java;
+package ir.maktab.java;
 
 public class Node<T> {
     T data;

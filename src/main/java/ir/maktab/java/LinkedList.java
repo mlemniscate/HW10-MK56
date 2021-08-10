@@ -1,4 +1,4 @@
-package ir.maktab.first_java;
+package ir.maktab.java;
 
 import java.util.Objects;
 
