@@ -31,7 +31,6 @@ public class FirstMenu extends Menu implements RunnableMenu<Void> {
                                 new ArrayList<String>() {{
                                     add("Add Activity");
                                     add("Change Activity Status");
-                                    add("Edit Activity");
                                     add("Sort Activities");
                                     add("Log Out");
                                 }},

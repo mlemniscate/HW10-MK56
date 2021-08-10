@@ -42,14 +42,11 @@ public class UserMenu extends Menu implements RunnableMenu<Void>{
                     ApplicationContext.activityService.update(activity);
                     showActivities();
                     break;
-//                case 3:
-//                    ApplicationContext.customerService.depositBalance(user);
-//                    break;
-                case 4:
+                case 3:
                     comparator = chooseComparatorOrder();
                     showActivities();
                     break;
-                case 5:
+                case 4:
                     if (new CheckMenu(new ArrayList<String>() {{
                         add("Yes");
                         add("No");
